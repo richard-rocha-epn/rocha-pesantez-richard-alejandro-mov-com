@@ -69,6 +69,18 @@ fun main(args: Array<String>) {
     println("el sueldo es: "+calcularSueldo(10.00, bonoEspecial = 20.00)) // nombrar parametros para no tener que digitar todos los aprametros
     println("el sueldo es: "+calcularSueldo(sueldo=10.00, tasa=14.00, bonoEspecial = 15.00))
 
+    val sumaUno = Suma(1,1)
+    val sumaDos = Suma(null, 1)
+    val sumaTres = Suma(1, null)
+    val sumaCuatro = Suma(null,null)
+    sumaUno.sumar()
+    sumaDos.sumar()
+    sumaTres.sumar()
+    sumaCuatro.sumar()
+    println(Suma.pi)
+    println(Suma.elevarAlCuadrado(2))
+    println(Suma.historialSuma)
+
 }
 
 abstract class numerosJava{
@@ -98,4 +110,39 @@ abstract class numeros(// constructor primario
         this.numeroUno; this.numeroDos; //el this es opcional
         println("Inicializando")
     }
+
 }
+
+
+class Suma( uno:Int, dos:Int):numeros(uno,dos){
+    init{
+        this.numeroUno;
+        this.numeroDos;
+    }
+    constructor(uno:Int?, dos:Int): this( if(uno==null) 0 else uno, dos)
+    constructor(uno:Int, dos:Int?): this(uno, if(dos==null) 0 else uno)
+    constructor(uno:Int?, dos:Int?): this(if(uno==null)0 else uno, if(dos==null)0 else dos)
+
+    public fun sumar(): Int{
+        val total= numeroUno+numeroDos
+        agregarHistorial(total)
+        return total
+    }
+
+    companion object { //atributos y metodos compartidos
+        //entre las instancias
+        val pi=3.14
+        fun elevarAlCuadrado(num: Int): Int{
+            return num*num
+        }
+        val historialSuma = arrayListOf<Int>()
+        fun agregarHistorial(valorNuevaSuma:Int){
+            historialSuma.add(valorNuevaSuma)
+        }
+
+    }
+
+
+
+}
+
