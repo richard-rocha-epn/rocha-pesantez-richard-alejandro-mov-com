@@ -1,4 +1,5 @@
 import java.util.*
+import kotlin.collections.ArrayList
 
 fun main(args: Array<String>) {
     println("Hello World!")
@@ -80,6 +81,91 @@ fun main(args: Array<String>) {
     println(Suma.pi)
     println(Suma.elevarAlCuadrado(2))
     println(Suma.historialSuma)
+
+
+    //Arreglos
+    //Tipos de arrelogs
+
+    //ESTATICO - No se puede editar
+    val arregloEstatico: Array<Int> = arrayOf<Int>(1,2,3,4)
+    println("Este es un arreglo estatico: $arregloEstatico" )
+
+    //Arreglo Dinamicos
+    val arregloDinamico: ArrayList<Int> = arrayListOf<Int>(1,2,3,4,5,6,7,8,9,10)
+    println("Este es un arreglo Dinamico: "+ arregloDinamico)
+    arregloDinamico.add(11);
+    arregloDinamico.add(12);
+    println("Este es un arreglo Dinamico despues de agregar: "+arregloDinamico)
+
+    print("Respuesta forEach largo:");
+    //foreach para arreglo dinmico o estatico.
+    val respuestaForEach: Unit = arregloDinamico.forEach{
+        valorArray:Int -> println("Valor actual: $valorArray ")
+    }
+    //print("Respuesta forEach largo: \n"+respuestaForEach)
+    //una forma simplificada es
+    println("Forma automatica de forEach:\n")
+    arregloDinamico.forEach{ println("Valor: $it") } //va iterando automaticamente
+    println("\nForEach con indices\n")
+    //podemos pasar dos parametros, es decir con el index1
+    arregloEstatico.forEachIndexed{indice: Int, valorArray:Int ->
+        println("Valor $valorArray \tIndice: $indice")
+    }
+
+
+    //MAP -> modificar y crar un nuevo arreglo con la informacion que deseemos
+    /*1) evieoms el nuevo valor de la iteraccion
+    * 2) nos devuelve es un nuevo arreglo con los valores modificados
+    * */
+    val respuestaMap: List<Double> = arregloDinamico.map{
+        valorActual:Int -> return@map valorActual.toDouble() + 100.00
+    }
+    print("\nMap largo\n")
+    respuestaMap.forEach{print("$it\t")}
+    print("\nMap corto\n")
+    //la forma simplificada de map
+    val respuestaSimpMap = arregloDinamico.map {it+15};
+    respuestaSimpMap.forEach{print("$it\t")}
+
+    /*Filter -> filtrar un arreglo
+    1-devolver una expresion true o false
+    2- nuevo arreglo filtrado
+    * */
+    val respuestaFilter: List<Int> = arregloDinamico.filter {
+        valorActual: Int -> val mayorACinco: Boolean = valorActual >5 //expresion o condicion
+        return@filter mayorACinco
+    }
+    val respuestaSimFilter = arregloDinamico.filter { it <=5 }
+    println("\nArreglo filtado largo: $respuestaFilter")
+    println("Arreglo filtrado corto: $respuestaSimFilter")
+
+    //or and
+    /* or -> any alguno cumple
+    and -> all todos cumplen
+    * */
+    val respuestaAny: Boolean = arregloDinamico.any{
+        valorActual: Int -> return@any(valorActual>5)
+    }
+    println("Respuesta Any: $respuestaAny");
+
+    val respuestaAll: Boolean = arregloDinamico.all{
+        valorActual: Int -> return@all (valorActual >5)
+    }
+    println("Repuesta all: $respuestaAll")
+
+    /*
+    * Reduce -> valor acumulado
+    * valor acumulado = 0 (siempre 0 en lenaje kotlin)
+    * [1,2,3,4,5] -> sumeme todos los valores del arreglo
+    * */
+
+    val respuestaReduce: Int = arregloDinamico.reduce{
+        //acumulado=0 -> siempre inicia en cero
+        acumulado: Int, valorActual:Int -> return@reduce (acumulado+valorActual)
+    }
+    println("vamos a sumar los valores del array: $respuestaReduce");
+
+
 
 }
 
